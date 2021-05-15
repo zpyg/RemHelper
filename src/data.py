@@ -31,6 +31,7 @@ class Item:
         info = self.read_info()
         info["name"] = target
         item.write_info(info)
+        item.write_text("")
         # 删除原项目
         self.rmitem()
         # 返回新的 Item 对象

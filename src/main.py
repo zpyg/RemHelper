@@ -68,8 +68,10 @@ class MainWindow(QMainWindow):
         new_name = self.change_window.ui.name.text()
         new_desc = self.change_window.ui.desc.text()
         item = self.data.getItem(info["name"])
-        item.rename(new_name)
         item.redesc(new_desc)
+        try:
+            item.rename(new_name)
+        except FileExistsError: pass
         self.setItems()
         self.change_window.close()
     
