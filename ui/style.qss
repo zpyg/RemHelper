@@ -1,0 +1,99 @@
+* {
+  font-family: "JetBrains Mono";
+  font-size: 16px;
+  background-color: #282828;
+  color: #ebdbb2;
+}
+
+QToolBar {
+  /*             上   右   下    左 */
+  border-style: none none none solid;
+  border-width: 2;
+  border-color: #689d6a;
+}
+
+QMenuBar {
+  background-color: #1d2021;
+  border-width: 1px;
+  border-style: none none solid none;
+  border-color: #689d6a;
+}
+QMenuBar::item {
+  padding: 5px;
+  background-color: #1d2021;
+}
+QMenuBar::item:selected {
+  color: #fbf1c7;
+  background-color: #689d6a;
+}
+
+QMenu {
+  font-size: 14px;
+}
+QMenu::item:selected {
+  color: #fbf1c7;
+  background-color: #689d6a;
+}
+
+QTableWidget {
+  border-style: none;
+  alternate-background-color: #1d2021;
+  selection-color: #fbf1c7;
+  selection-background-color: #689d6a;
+}
+QHeaderView::section {
+  border: none;
+  background-color: #1d2021;
+  text-align: center;
+  color: #fbf1c7;
+}
+QTableView QTableCornerButton::section {
+  background-color: #282828;
+}
+
+QLineEdit {
+  border: 1px solid #689d6a;
+}
+
+QPlainTextEdit {
+  border: 1px solid #689d6a;
+}
+
+QTextBrowser {
+  border: 1px solid #689d6a;
+}
+
+QPushButton {
+  font-size: 18px;
+  color: #fbf1c7;
+  background: #689d6a;
+  border: 1px solid #689d6a;
+}
+
+QScrollBar {
+  background: #a89984;
+}
+QScrollBar:horizontal {
+  margin: 0px 0px 0px 0px;
+}
+QScrollBar:vertical {
+  margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle {
+  background: #928374;
+}
+QScrollBar::handle:hover, QScrollBar::add-line:hover, QScrollBar::sub-line:hover {
+  background: #689d6a;
+}
+QScrollBar::add-line {
+  subcontrol-origin: none;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+  height: 0px;
+}
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+  width: 0px;
+}
+QScrollBar::sub-line {
+  subcontrol-origin: none;
+}
