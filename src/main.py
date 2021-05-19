@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
+from pathlib import Path
+WORKDIR = Path(__file__).parents[1].__str__()
+sys.path.append(WORKDIR)
+os.chdir(WORKDIR)
+
 from time import strftime, localtime
 
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QIcon, QFontDatabase
 from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox
 
-sys.path.append(".")
 from uic import ui_main
 from src.data import Data
 from src.editor import MarkdownEditor, InfoEditor
