@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
+# 将工作目录添加到环境变量
 import sys
-import os
-from pathlib import Path
-WORKDIR = Path(__file__).parents[1].__str__()
-sys.path.append(WORKDIR)
-os.chdir(WORKDIR)
+sys.path.append(".")
+# 另一种方案，海龟编辑器时使用
+# import sys
+# import os
+# from pathlib import Path
+# WORKDIR = Path(__file__).parents[1].__str__()
+# sys.path.append(WORKDIR)
+# os.chdir(WORKDIR)
 
 from time import strftime, localtime
 
