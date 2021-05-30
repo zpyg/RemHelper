@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>850</width>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,25 +15,102 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
-     <widget class="QPlainTextEdit" name="editor"/>
-    </item>
-    <item>
-     <widget class="QTextBrowser" name="browser"/>
+     <widget class="QTableWidget" name="group">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="rowCount">
+       <number>1</number>
+      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+       <bool>false</bool>
+      </attribute>
+      <row/>
+      <column>
+       <property name="text">
+        <string>编辑</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>预览</string>
+       </property>
+      </column>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>850</width>
+     <height>23</height>
+    </rect>
    </property>
-   <attribute name="toolBarArea">
-    <enum>RightToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="save"/>
+    <addaction name="view"/>
+    <addaction name="open"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
+  <action name="save">
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </action>
+  <action name="view">
+   <property name="text">
+    <string>预览</string>
+   </property>
+  </action>
+  <action name="open">
+   <property name="text">
+    <string>外部编辑</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

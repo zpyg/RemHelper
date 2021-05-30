@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>608</height>
+    <width>850</width>
+    <height>618</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -118,7 +118,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>820</width>
+     <width>850</width>
      <height>23</height>
     </rect>
    </property>
@@ -134,7 +134,6 @@
      <string>查找</string>
     </property>
     <addaction name="search"/>
-    <addaction name="screen"/>
     <addaction name="sort"/>
    </widget>
    <widget class="QMenu" name="edit">

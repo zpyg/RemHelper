@@ -1,32 +1,35 @@
 #!/usr/bin/env python3
 import sys
 sys.path.append(".")
+
 from pathlib import Path
 from os import remove
 from shutil import rmtree, copytree, copy
 import subprocess
 
+PYINSTALLER_ARGS = [
+    "--onedir",
+    "--icon=./img/favicon.ico",
+    "--windowed",
+    "--log-level=WARN"
+]
+
+
 def gen_uic():
     """生成ui文件的python代码"""
+    import subprocess
     uic_dir = Path("./uic")
     if not uic_dir.is_dir(): uic_dir.mkdir()
     for ui in Path("./ui").glob("*.ui"):
         with open(f"{uic_dir}/ui_{ui.stem}.py", "w") as uic:
             subprocess.run(["pyside2-uic", ui], stdout=uic)
 
-def compil(debug: bool = False):
-    """使用pyinstaller编译源码
-    
-    Args:
-        debug: 使用调试模式。开启后将显示所有输出且不隐藏控制台
-    """
+
+def compil():
+    """使用pyinstaller编译源码"""
     # 编译
     gen_uic()
-    args = ["pyinstaller", "--onedir", "--icon=./img/favicon.ico", "./src/main.py"]
-    if debug != True:
-        args.insert(1, "--windowed")
-        args.insert(1, "--log-level=WARN")
-    subprocess.run(args)
+    subprocess.run(["pyinstaller", *PYINSTALLER_ARGS, "./src/main.py"])
     # 调整目录结构
     Path("./dist/main").rename("./dist_")
     rmtree("./dist")
@@ -39,33 +42,35 @@ def compil(debug: bool = False):
     copytree("./font", "./dist/font")
     copytree("./img", "./dist/img")
 
-def install(debug: bool = False):
+
+def install():
     """使用Inno Setup生成安装程序"""
-    compil(debug)
+    compil()
     if Path("./release").is_dir(): rmtree("./release")
     subprocess.run(["ISCC", "./script/installer.iss"])
 
+
 def run():
-    """以python运行程序"""
+    """运行程序"""
     gen_uic()
     subprocess.run(["python", "./src/main.py"])
 
+
 def gen_test_data():
-    """生成测试用的数据"""
-    from src.data import Data
-    s = """\
-某君昆仲，今隐其名，皆余昔日在中学时良友；\
-分隔多年，消息渐阙。日前偶闻其一大病；适归故乡，迂道往访，则仅晤一人，言病者其弟也。\
-劳君远道来视，然已早愈，赴某地候补⑵矣。因大笑，出示日记二册，谓可见当日病状，不妨献诸旧友。\
-持归阅一过，知所患盖“迫害狂”之类。语颇错杂无伦次，又多荒唐之言；亦不著月日，惟墨色字体不一，知非一时所书。\
-间亦有略具联络者，今撮录一篇，以供医家研究。记中语误，一字不易；惟人名虽皆村人，不为世间所知，无关大体，然亦悉易去。\
-至于书名，则本人愈后所题，不复改也。七年四月二日识。\
-    """
-    try:
-        for x in [k for i in s.split("，") for j in i.split("；") for k in j.split("。")]:
-            Data().addItem(x, x[::-1])
-    except FileExistsError:
-        pass
+    """生成测试数据"""
+    from src.data import Item
+    from faker import Faker
+    from time import time
+    from random import uniform
+    faker = Faker(locale="zh_CN")
+    for _ in range(128):
+        item = Item(faker.word() + faker.user_name() + faker.word())
+        item.mkitem(faker.sentence())
+        info = item.read_info()
+        now = time()
+        info["ctime"] = uniform(now-604800, now)
+        item.write_info(info)
+
 
 def test():
     """编译后运行, 并生成测试数据"""
@@ -78,8 +83,29 @@ def test():
     rmtree("./dist")
 
 
+def clean():
+    """删除非必须目录"""
+    rmtree("./data", ignore_errors=True)
+    rmtree("./uic", ignore_errors=True)
+    rmtree("./dist", ignore_errors=True)
+    rmtree("./release", ignore_errors=True)
+    rmtree("./data", ignore_errors=True)
+    rmtree("./src/__pycache__", ignore_errors=True)
+
+
+__doc__ = f"""\
+run {run.__doc__}
+test {test.__doc__}
+compil {compil.__doc__}
+install {install.__doc__}
+gen_uic {gen_uic.__doc__}
+gen_test_data {gen_test_data.__doc__}
+clean {clean.__doc__}
+"""
 if __name__ == "__main__":
     try:
         eval(f"{sys.argv[1]}()")
     except IndexError:
         run()
+    except NameError:
+        print(__doc__)
