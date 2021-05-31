@@ -26,7 +26,7 @@ PrivilegesRequired=lowest
 OutputDir=..\release
 OutputBaseFilename={#MyAppName}_setup_{#MyAppVersion}
 SetupIconFile=..\img\favicon.ico
-Compression=lzma/max
+Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
 
