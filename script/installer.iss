@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "RemHelper"
-#define MyAppVersion "1.0.1_2021_5_31"
+#define MyAppVersion "1.0.2_2021_5_31"
 #define MyAppPublisher "Pu"
 #define MyAppURL "https://github.com/Pu-gayhub/RemHelper"
 #define MyAppExeName "main.exe"
