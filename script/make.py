@@ -22,7 +22,7 @@ def gen_uic():
     if not uic_dir.is_dir(): uic_dir.mkdir()
     for ui in Path("./ui").glob("*.ui"):
         with open(f"{uic_dir}/ui_{ui.stem}.py", "w") as uic:
-            subprocess.run(["pyside2-uic", ui], stdout=uic)
+            subprocess.run(["pyside2-uic", str(ui)], stdout=uic)
 
 
 def compil():
@@ -74,6 +74,7 @@ def gen_test_data():
 
 def test():
     """编译后运行, 并生成测试数据"""
+    PYINSTALLER_ARGS.remove("--windowed")
     gen_uic()
     compil()
     gen_test_data()
